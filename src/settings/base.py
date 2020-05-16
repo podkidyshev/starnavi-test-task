@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'starnavi.user.apps.UserConfig',
+    'starnavi.post.apps.PostConfig',
 ]
 
 MIDDLEWARE = [
