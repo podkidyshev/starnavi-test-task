@@ -8,7 +8,7 @@ class PostSerializer(ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'author', 'title', 'description', 'date_created', 'likes_count']
+        fields = ['id', 'author', 'text', 'date_created', 'likes_count']
 
     def validate(self, attrs):
         attrs = super().validate(attrs)

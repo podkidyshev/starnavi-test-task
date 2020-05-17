@@ -14,8 +14,7 @@ class Post(models.Model):
         related_name='posts',
         verbose_name='Author')
 
-    title = models.CharField('Title', max_length=64)
-    description = models.TextField('Description', max_length=1000, blank=True, default='')
+    text = models.TextField('Text', max_length=1000)
 
     date_created = models.DateTimeField('Created date', auto_now_add=True)
     date_modified = models.DateTimeField('Modified date', auto_now=True)
