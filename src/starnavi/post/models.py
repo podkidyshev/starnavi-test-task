@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Count
+from django.db.models.functions import TruncDate
 
 from starnavi.user.models import User
 
@@ -51,3 +52,7 @@ class Like(models.Model):
         unique_together = [
             ['user', 'post']
         ]
+
+    @classmethod
+    def group_by_date(cls):
+        return cls.objects.annotate(agg_date=TruncDate('date')).values('agg_date')
