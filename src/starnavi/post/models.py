@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 
 from starnavi.user.models import User
 
@@ -23,6 +24,16 @@ class Post(models.Model):
         db_table = 'posts'
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+
+        ordering = ['-date_created']
+
+    @classmethod
+    def annotate_likes_count(cls, queryset):
+        return queryset.annotate(_likes_count=Count('likes'))
+
+    @property
+    def likes_count(self):
+        return getattr(self, '_likes_count', None)
 
 
 class Like(models.Model):
