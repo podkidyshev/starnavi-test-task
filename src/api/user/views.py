@@ -3,9 +3,12 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
 from .serializers import UserSerializer
+from .permissions import UserAuthenticated
 
 
 class UserViewSet(ViewSet):
+    permission_classes = [UserAuthenticated]
+
     def retrieve(self, request, *args, **kwargs):
         return Response(UserSerializer(instance=request.user).data)
 
@@ -15,11 +18,3 @@ class UserViewSet(ViewSet):
         serializer.is_valid(True)
         serializer.save()
         return Response(serializer.data)
-
-    @action(detail=False, methods=['POST'])
-    def login(self, request, *args, **kwargs):
-        pass
-
-    @action(detail=False, methods=['POST'])
-    def refresh(self, request, *args, **kwargs):
-        pass
