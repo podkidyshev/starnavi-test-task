@@ -1,10 +1,12 @@
 import datetime
 
 from rest_framework.exceptions import ValidationError
-from rest_framework.serializers import Serializer, ListSerializer, DateField, IntegerField
+from rest_framework.serializers import Serializer, ListSerializer, ModelSerializer, DateField, IntegerField
+
+from starnavi.user.models import User
 
 
-class AnalyticsInputSerializer(Serializer):
+class LikesAnalyticsInputSerializer(Serializer):
     date_from = DateField(required=True)
     date_to = DateField(required=True)
 
@@ -14,7 +16,7 @@ class AnalyticsInputSerializer(Serializer):
         return attrs
 
 
-class AnalyticsOutputListSerializer(ListSerializer):
+class LikesAnalyticsOutputListSerializer(ListSerializer):
     def to_representation(self, instance):
         """
         Pad missing dates in groups
@@ -34,7 +36,7 @@ class AnalyticsOutputListSerializer(ListSerializer):
         while sliding_date >= date_from:
             if self.instance[idx]['agg_date'] != sliding_date:
                 # no likes at that date
-                return_data.append(AnalyticsOutputSerializer.get_default_by_date(sliding_date))
+                return_data.append(LikesAnalyticsOutputSerializer.get_default_by_date(sliding_date))
             else:
                 # there are likes at that date - move sliding window on array
                 return_data.append(data[idx])
@@ -46,12 +48,12 @@ class AnalyticsOutputListSerializer(ListSerializer):
         return return_data
 
 
-class AnalyticsOutputSerializer(Serializer):
+class LikesAnalyticsOutputSerializer(Serializer):
     date = DateField(source='agg_date')
     likes_count = IntegerField()
 
     class Meta:
-        list_serializer_class = AnalyticsOutputListSerializer
+        list_serializer_class = LikesAnalyticsOutputListSerializer
 
     @classmethod
     def get_default_by_date(cls, date):
@@ -59,3 +61,9 @@ class AnalyticsOutputSerializer(Serializer):
             'date': date.isoformat(),
             'likes_count': 0
         }
+
+
+class UserAnalyticsSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'is_staff', 'date_joined', 'last_login', 'last_request']

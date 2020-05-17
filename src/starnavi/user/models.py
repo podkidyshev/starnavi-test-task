@@ -12,6 +12,7 @@ class User(AbstractBaseUser):
 
     is_staff = models.BooleanField('Is staff')
 
+    last_request = models.DateTimeField('Last request date', null=True)
     date_joined = models.DateTimeField('Joined date', auto_now_add=True)
 
     USERNAME_FIELD = 'username'
