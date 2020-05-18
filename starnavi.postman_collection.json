@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "0cb39807-4637-4425-a4d1-7fe1071ea2f2",
+		"name": "starnavi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\",\n\t\"password\": \"Password1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/user/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "obtain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c16eca2a-4ebc-4a05-a415-e0ddd887932b",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"access\", jsonData.access);\r",
+							"postman.setEnvironmentVariable(\"refresh\", jsonData.refresh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/auth/obtain"
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3b14bea-edbc-486a-a2fe-237fb9ca4384",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"access\", jsonData.access);\r",
+							"postman.setEnvironmentVariable(\"refresh\", jsonData.refresh);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU4OTgxMDExOSwianRpIjoiYWYxNmNiNDA1NmIxNDg0ZTk3MTNiZjZlNjA5YzI5YTQiLCJ1c2VybmFtZSI6ImNsaWVudCIsImlzcyI6InN0YXJuYXZpIn0.L3iKQJ9BNeCuNy_Rj_QWx4_Uej-gR-7L6I7t1jeivOM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/auth/refresh"
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/user"
+			},
+			"response": []
+		},
+		{
+			"name": "posts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/api/posts"
+			},
+			"response": []
+		},
+		{
+			"name": "posts-create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"test created via api\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/posts"
+			},
+			"response": []
+		},
+		{
+			"name": "like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8000/api/posts/2/like"
+			},
+			"response": []
+		},
+		{
+			"name": "unlike",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8000/api/posts/2/unlike"
+			},
+			"response": []
+		},
+		{
+			"name": "analytics-likes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/analytics/?date_to=2020-05-20&date_from=2020-05-18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"analytics",
+						""
+					],
+					"query": [
+						{
+							"key": "date_to",
+							"value": "2020-05-20"
+						},
+						{
+							"key": "date_from",
+							"value": "2020-05-18"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "analytics-user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/analytics/user/admin"
+			},
+			"response": []
+		},
+		{
+			"name": "analytics-users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{access}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8000/api/analytics/users"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
