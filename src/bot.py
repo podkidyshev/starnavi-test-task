@@ -6,7 +6,7 @@ import requests
 import mimesis
 
 
-directory = os.path.dirname(__file__)
+directory = os.path.dirname(os.path.dirname(__file__))
 default_dotenv_path = os.path.join(directory, '.env')
 
 
@@ -48,6 +48,12 @@ def signup_user(url, password):
     }
     data['access'] = requests.post(url + 'api/auth/obtain', json=auth_payload).json()['access']
 
+    print('Created user:\n'
+          'username={username}\n'
+          'email={email}\n'
+          'password={password}\n'
+          '{split}'.format(**data, split='-' * 10))
+
     return data
 
 
@@ -70,9 +76,9 @@ def main():
     env = read_config(dotenv_path)
 
     url = env.str('url', default='http://localhost:8000/')
-    number_of_users = env.int('number_of_users', 5)
-    max_posts_per_user = env.int('max_posts_per_user', 5)
-    max_likes_per_user = env.int('max_likes_per_user', 5)
+    number_of_users = max(env.int('number_of_users', 5), 0)
+    max_posts_per_user = max(env.int('max_posts_per_user', 5), 0)
+    max_likes_per_user = max(env.int('max_likes_per_user', 5), 0)
     user_password = env.str('password', 'P@ssword1234')
 
     # signup users

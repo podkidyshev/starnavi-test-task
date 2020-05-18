@@ -35,10 +35,17 @@ class LikesAnalyticsView(APIView):
 class UserAnalyticsView(APIView):
     permission_classes = api_settings.DEFAULT_PERMISSION_CLASSES + [IsAdminUser]
 
-    def get(self, request, pk):
+    def get(self, request, username):
         try:
-            user = User.objects.get(pk=pk)
+            user = User.objects.get(username=username)
         except User.DoesNotExist:
             raise NotFound
 
         return Response(UserAnalyticsSerializer(instance=user).data)
+
+
+class AllUsersAnalyticsView(APIView):
+    permission_classes = api_settings.DEFAULT_PERMISSION_CLASSES + [IsAdminUser]
+
+    def get(self, request):
+        return Response(UserAnalyticsSerializer(instance=User.objects.all(), many=True).data)
