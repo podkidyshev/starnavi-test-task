@@ -7,10 +7,10 @@ from starnavi.user.models import User
 
 class JWTAuthentication(SimpleJWTAuthentication):
     def authenticate(self, request):
-        user, token = super().authenticate(request)
+        auth_result = super().authenticate(request)
 
-        if isinstance(user, User):
-            user.last_request = timezone.now()
-            user.save(update_fields=['last_request'])
+        if isinstance(auth_result, tuple) and isinstance(auth_result[0], User):
+            auth_result[0].last_request = timezone.now()
+            auth_result[0].save(update_fields=['last_request'])
 
-        return user, token
+        return auth_result
