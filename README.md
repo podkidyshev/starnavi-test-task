@@ -1,8 +1,8 @@
 # Starnavi – тестовое задание
-Предполагается, что все команды ниже будут вводится из корня проекта.
+Предполагается, что все команды ниже будут вводится из корня проекта. В качестве БД используется sqlite.
 
 
-Запуск проекта нативно (без docker'а):
+Запуск проекта:
 
 ```shell script
 python -m venv venv
@@ -11,14 +11,6 @@ cd src
 python manage.py migrate
 python manage.py runserver
 ```
-
-Запуск проекта с помощью docker-compose:
-
-```shell script
-docker-compose up -d --build
-```
-
-В docker-compose помимо контейнера с Python подняты контейнеры с PostgreSQL и Nginx.
 
 Запуск бота:
 ```shell script
@@ -46,15 +38,9 @@ python src/bot.py
  - api/analytics/users – получение статистики по всем пользователям
  - api/analytics/user/{username} - получение статистики по конкретному пользователю (в задании не был указан url для этого метода)
  
- Методы из раздела analytics требуют правда администратора (поле is_staff). Для создания администратора:
+ Методы из раздела analytics требуют прав администратора (поле is_staff). Для создания администратора:
  
 ```shell script
 cd src
 python manage.py createsuperuser
-```
-
-Или с помощью docker-compose:
-
-```shell script
-docker-compose exec back python manage.py createsuperuser
 ```
