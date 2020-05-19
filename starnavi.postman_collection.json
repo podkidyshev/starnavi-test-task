@@ -2,9 +2,51 @@
 	"info": {
 		"_postman_id": "0cb39807-4637-4425-a4d1-7fe1071ea2f2",
 		"name": "starnavi",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "signup",
 			"request": {
@@ -12,14 +54,26 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\",\n\t\"password\": \"Password1234\"\n}",
+					"raw": "{\n\t\"username\": \"client\",\n\t\"email\": \"client@starnavi.com\",\n\t\"password\": \"P@ssword1234\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/user/signup"
+				"url": {
+					"raw": "http://localhost:8000/api/user/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"signup"
+					]
+				}
 			},
 			"response": []
 		},
@@ -51,7 +105,19 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/auth/obtain"
+				"url": {
+					"raw": "http://localhost:8000/api/auth/obtain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"obtain"
+					]
+				}
 			},
 			"response": []
 		},
@@ -63,8 +129,8 @@
 					"script": {
 						"id": "a3b14bea-edbc-486a-a2fe-237fb9ca4384",
 						"exec": [
-							"var jsonData = JSON.parse(responseBody);\r",
-							"postman.setEnvironmentVariable(\"access\", jsonData.access);\r",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access\", jsonData.access);",
 							"postman.setEnvironmentVariable(\"refresh\", jsonData.refresh);"
 						],
 						"type": "text/javascript"
@@ -76,14 +142,26 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU4OTgxMDExOSwianRpIjoiYWYxNmNiNDA1NmIxNDg0ZTk3MTNiZjZlNjA5YzI5YTQiLCJ1c2VybmFtZSI6ImNsaWVudCIsImlzcyI6InN0YXJuYXZpIn0.L3iKQJ9BNeCuNy_Rj_QWx4_Uej-gR-7L6I7t1jeivOM\"\n}",
+					"raw": "{\n\t\"refresh\": \"{{refresh}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/auth/refresh"
+				"url": {
+					"raw": "http://localhost:8000/api/auth/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"refresh"
+					]
+				}
 			},
 			"response": []
 		},
@@ -95,9 +173,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -110,7 +192,18 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/user"
+				"url": {
+					"raw": "http://localhost:8000/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
 			},
 			"response": []
 		},
@@ -119,13 +212,28 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8000/api/posts"
+				"url": {
+					"raw": "http://localhost:8000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
 			},
 			"response": []
 		},
@@ -134,22 +242,37 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"test created via api\"\n}",
+					"raw": "{\n\t\"text\": \"test created via api\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/posts"
+				"url": {
+					"raw": "http://localhost:8000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
 			},
 			"response": []
 		},
@@ -158,13 +281,30 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
-				"url": "http://localhost:8000/api/posts/2/like"
+				"url": {
+					"raw": "http://localhost:8000/api/posts/2/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts",
+						"2",
+						"like"
+					]
+				}
 			},
 			"response": []
 		},
@@ -173,13 +313,30 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
-				"url": "http://localhost:8000/api/posts/2/unlike"
+				"url": {
+					"raw": "http://localhost:8000/api/posts/2/unlike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts",
+						"2",
+						"unlike"
+					]
+				}
 			},
 			"response": []
 		},
@@ -191,9 +348,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -240,9 +401,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -255,7 +420,20 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/analytics/user/admin"
+				"url": {
+					"raw": "http://localhost:8000/api/analytics/user/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"analytics",
+						"user",
+						"admin"
+					]
+				}
 			},
 			"response": []
 		},
@@ -267,9 +445,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{access}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -282,7 +464,19 @@
 						}
 					}
 				},
-				"url": "http://localhost:8000/api/analytics/users"
+				"url": {
+					"raw": "http://localhost:8000/api/analytics/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"analytics",
+						"users"
+					]
+				}
 			},
 			"response": []
 		}

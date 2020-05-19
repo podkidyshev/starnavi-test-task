@@ -34,7 +34,7 @@ class LikesAnalyticsOutputListSerializer(ListSerializer):
         idx = 0
         sliding_date = datetime.date(year=date_to.year, month=date_to.month, day=date_to.day)
         while sliding_date >= date_from:
-            if self.instance[idx]['agg_date'] != sliding_date:
+            if idx >= len(self.instance) or self.instance[idx]['agg_date'] != sliding_date:
                 # no likes at that date
                 return_data.append(LikesAnalyticsOutputSerializer.get_default_by_date(sliding_date))
             else:

@@ -1,20 +1,26 @@
 # Starnavi – тестовое задание
-Предполагается, что все команды ниже будут вводится из корня проекта. В качестве БД используется sqlite.
+Предполагается, что все команды ниже будут вводится из корня проекта с активированной вертуальной средой (команда source из скрипта ниже). 
+В качестве БД используется sqlite.
 
 
 Запуск проекта:
 
 ```shell script
 python -m venv venv
-python -m pip install -r requiremnts.txt
+source venv/bin/activate
+python -m pip install -r requirements.txt
 cd src
 python manage.py migrate
 python manage.py runserver
 ```
 
+Приложение доступно по адресу http://localhost:8000. 
+Для удобства добавлена поддержка django-admin.
+
 Запуск бота:
 ```shell script
 cp .env.example .env
+source venv/bin/activate
 python src/bot.py
 ```
 
@@ -41,6 +47,7 @@ python src/bot.py
  Методы из раздела analytics требуют прав администратора (поле is_staff). Для создания администратора:
  
 ```shell script
+source venv/bin/activate
 cd src
 python manage.py createsuperuser
 ```
