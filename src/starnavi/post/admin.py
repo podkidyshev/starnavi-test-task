@@ -12,7 +12,7 @@ class LikeAdmin(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('id', 'author')}),
-        ('Main', {'fields': ('title', 'description')}),
+        ('Main', {'fields': ('text',)}),
         ('Important dates', {'fields': ('date_created', 'date_modified')})
     )
     readonly_fields = ('id', 'date_created', 'date_modified')
